@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Event = ({ event }) => (
+const Event = ({ event, onDelete }) => (
   <div className="eventContainer">
   <div>
     <h2>
@@ -50,6 +50,7 @@ const Event = ({ event }) => (
 
 Event.propTypes = {
   event: PropTypes.shape(),
+  onDelete: PropTypes.func.isRequired,
 };
 
 Event.defaultProps = {
