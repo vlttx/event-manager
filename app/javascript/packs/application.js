@@ -17,8 +17,17 @@
 
 import React from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import App from '../components/App';
 
 document.addEventListener('DOMContentLoaded', () => {
-  render(<App />, document.querySelector('#root'));
+  render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>,
+    document.querySelector('#root'),
+  );
 });
+
+// This wraps the app in a <BrowserRouter> component, 
+// that uses the HTML5 history API to keep the UI in sync with the URL.
