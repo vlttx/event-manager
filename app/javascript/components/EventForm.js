@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isEmptyObject, validateEvent } from '../helpers/helpers';
+import { formatDate, isEmptyObject, validateEvent } from '../helpers/helpers';
+import Pikaday from 'pikaday';
+import 'pikaday/css/pikaday.css';
 
 class EventForm extends React.Component {
   constructor(props) {
@@ -11,9 +13,30 @@ class EventForm extends React.Component {
       errors: {},
     };
 
+    this.dateInput = React.createRef();
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
+
+  componentDidMount() {
+  new Pikaday({
+    field: this.dateInput.current,
+    onSelect: (date) => {
+      const formattedDate = formatDate(date);
+      this.dateInput.current.value = formattedDate;
+      this.updateEvent('event_date', formattedDate);
+    },
+  });
+}
+
+
+// Thanks to our ref, the field property of the configuration 
+// object that we are passing to Pikaday’s constructor, points 
+// to DOM element we want to turn into a datepicker. 
+// The onSelect method determines what will happen when the 
+// user selects a date. In this case, the date is formatted into 
+// a YYYY-MM-DD string and the event object we are holding in state is updated.
 
   handleSubmit(e) {
     e.preventDefault();
@@ -112,7 +135,7 @@ class EventForm extends React.Component {
           <div>
             <label htmlFor="title">
               <strong>Title:</strong>
-              <textarea cols="30" rows="10" id="title" name="title" onChange={this.handleInputChange}/>
+              <textarea cols="30" rows="10" id="title" name="title" ref={this.dateInput} autoComplete="off"/>
             </label>
           </div>
           <div>
