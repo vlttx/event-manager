@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Pikaday from 'pikaday';
 import { Link } from 'react-router-dom';
 import { formatDate, isEmptyObject, validateEvent } from '../helpers/helpers';
-// import EventNotFound from './EventNotFound';
+import EventNotFound from './EventNotFound';
 import 'pikaday/css/pikaday.css';
 
 class EventForm extends React.Component {
@@ -133,9 +133,10 @@ updateEvent(key, value) {
 
   render() {
     const { event } = this.state;
-    // const { path } = this.props;
+    const { path } = this.props;
 
-    // if (!event.id && path === '/events/:id/edit') return <EventNotFound />;
+    if (!event.id && path === '/events/:id/edit') return <EventNotFound />;
+   // If the user attempts to view or edit a non-existent event, they will be shown a 404 component.
 
     const cancelURL = event.id ? `/events/${event.id}` : '/events';
     const title = event.id ? `${event.event_date} - ${event.event_type}` : 'New Event';
