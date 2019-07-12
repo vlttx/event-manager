@@ -13,6 +13,7 @@ class Editor extends React.Component {
   }
 
   componentDidMount() {
+    // using lifecycle hook to fetch events from the API
     axios
       .get('/api/events.json')
       .then(response => this.setState({ events: response.data }))
@@ -24,6 +25,7 @@ class Editor extends React.Component {
   render() {
     const { events } = this.state;
     if (events === null) return null;
+    //have to guard in case nothing is rendered, but if fetched we will render the eventlist
 
     return (
       <div>
