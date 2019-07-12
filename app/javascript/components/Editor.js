@@ -5,6 +5,9 @@ import EventList from './EventList';
 import PropTypes from 'prop-types';
 import PropsRoute from './PropsRoute';
 import Event from './Event';
+import { Switch } from 'react-router-dom';
+import EventForm from './EventForm';
+
 
 class Editor extends React.Component {
   constructor(props) {
@@ -39,7 +42,10 @@ class Editor extends React.Component {
         <Header />
         <div className="grid">
         <EventList events={events} activeId={Number(eventId)}/>
-        <PropsRoute path="/events/:id" component={Event} event={event} />
+        <Switch>
+            <PropsRoute path="/events/new" component={EventForm} />
+            <PropsRoute path="/events/:id" component={Event} event={event} />
+          </Switch>
         </div>
 
 
@@ -61,3 +67,16 @@ export default Editor;
 // If you look at the render method, you’ll notice we’re using a new component called <PropsRoute>. 
 // This is because when a user selects an event, we want to pass that event to the <Event> component, so that it can display it. 
 // Unfortunately, out of the box, React Router doesn’t offer an easy way to pass props to a route, so we’re left to write this ourselves.
+
+
+//  <Switch> component, which will render the first child <Route> that matches the location. 
+// This is practical, as we don’t want the new event form and the <Event> component to display at once.
+
+
+
+
+
+
+
+
+
