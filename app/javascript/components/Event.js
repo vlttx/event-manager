@@ -8,6 +8,9 @@ const Event = ({ event }) => (
       {event.event_date}
       {' - '}
       {event.event_type}
+      <button className="delete" type="button" onClick={() => onDelete(event.id)}>
+        Delete
+      </button>
     </h2>
     <ul>
       <li>
