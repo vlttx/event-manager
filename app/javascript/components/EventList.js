@@ -7,7 +7,10 @@ class EventList extends React.Component {
     events.sort(
       (a, b) => new Date(b.event_date) - new Date(a.event_date),
     );
-
+    // Here we have a renderEvents method which returns a sorted list of events
+    // for the render method to display.
+    // Note that we have also implemented some simple prop validation
+    // to ensure that the component is passed an array.
     return events.map(event => (
       <li key={event.id}>
         {event.event_date}

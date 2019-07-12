@@ -25,7 +25,8 @@ class Editor extends React.Component {
   render() {
     const { events } = this.state;
     if (events === null) return null;
-    //have to guard in case nothing is rendered, but if fetched we will render the eventlist
+    // have to guard in case nothing is rendered, but if fetched
+    // we will render the eventlist
 
     return (
       <div>
