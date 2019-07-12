@@ -20,6 +20,7 @@ class Editor extends React.Component {
     };
     this.addEvent = this.addEvent.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
+    this.updateEvent = this.updateEvent.bind(this);
   }
 
   componentDidMount() {
@@ -77,6 +78,21 @@ class Editor extends React.Component {
     }
   }
 
+  updateEvent(updatedEvent) {
+    axios
+      .put(`/api/events/${updatedEvent.id}.json`, updatedEvent)
+      .then(() => {
+        success('Event updated');
+        const { events } = this.state;
+        const idx = events.findIndex(event => event.id === updatedEvent.id);
+        events[idx] = updatedEvent;
+        const { history } = this.props;
+        history.push(`/events/${updatedEvent.id}`);
+        this.setState({ events });
+      })
+      .catch(handleAjaxError);
+  }
+
 
   render() {
     const { events } = this.state;
@@ -94,6 +110,7 @@ class Editor extends React.Component {
         <EventList events={events} activeId={Number(eventId)}/>
         <Switch>
             <PropsRoute path="/events/new" component={EventForm} onSubmit={this.addEvent}/>
+            <PropsRoute exact path="/events/:id/edit" component={EventForm} event={event} onSubmit={this.updateEvent}/>
             <PropsRoute path="/events/:id" component={Event} event={event} onDelete={this.deleteEvent}/>
           </Switch>
         </div>
@@ -115,6 +132,8 @@ Editor.defaultProps = {
 
 
 export default Editor;
+
+//PROPS ROUTES order is important due to path matching
 // If you look at the render method, you’ll notice we’re using a new component called <PropsRoute>. 
 // This is because when a user selects an event, we want to pass that event to the <Event> component, so that it can display it. 
 // Unfortunately, out of the box, React Router doesn’t offer an easy way to pass props to a route, so we’re left to write this ourselves.

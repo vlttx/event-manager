@@ -38,6 +38,11 @@ componentWillReceiveProps({ event }) {
     this.setState({ event });
   }
 
+  // we need to hook into the componentWillReceiveProps lifecycle method 
+  // to ensure that the fields are cleared when a user is editing an event, then clicks New Event.
+
+
+
 updateEvent(key, value) {
   this.setState(prevState => ({
     event: {
@@ -127,7 +132,7 @@ updateEvent(key, value) {
 
 
   render() {
-    // const { event } = this.state;
+    const { event } = this.state;
     // const { path } = this.props;
 
     // if (!event.id && path === '/events/:id/edit') return <EventNotFound />;
