@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Event = ({ event }) => (
+  <div className="eventContainer">
   <div>
     <h2>
       {event.event_date}
@@ -40,6 +41,7 @@ const Event = ({ event }) => (
         {event.published ? 'yes' : 'no'}
       </li>
     </ul>
+    </div>
   </div>
 );
 

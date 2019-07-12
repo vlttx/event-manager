@@ -37,11 +37,12 @@ class Editor extends React.Component {
     return (
       <div>
         <Header />
+        <div className="grid">
         <EventList events={events} />
         <PropsRoute path="/events/:id" component={Event} event={event} />
+        </div>
 
 
-        
       </div>
     );
   }
@@ -58,5 +59,5 @@ Editor.defaultProps = {
 
 export default Editor;
 // If you look at the render method, you’ll notice we’re using a new component called <PropsRoute>. 
-        // This is because when a user selects an event, we want to pass that event to the <Event> component, so that it can display it. 
-        // Unfortunately, out of the box, React Router doesn’t offer an easy way to pass props to a route, so we’re left to write this ourselves.
+// This is because when a user selects an event, we want to pass that event to the <Event> component, so that it can display it. 
+// Unfortunately, out of the box, React Router doesn’t offer an easy way to pass props to a route, so we’re left to write this ourselves.
